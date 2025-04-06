@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SINAPxFORGE - Conseil en IA, Blockchain & Développement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#9c7cf6',  // Violet
+                        secondary: '#d4af37', // Or
+                        dark: '#0f0f1a',
+                        darker: '#080811',
+                        accent: '#6e45e2'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #080811;
+            color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #9c7cf6 0%, #d4af37 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(156, 124, 246, 0.2), 0 10px 10px -5px rgba(156, 124, 246, 0.04);
+            border-color: #9c7cf6;
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(156, 124, 246, 0.4);
+        }
+        
+        .animated-border {
+            position: relative;
+        }
+        
+        .animated-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #9c7cf6 0%, #d4af37 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .animated-border:hover::after {
+            width: 100%;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .tech-icon {
+            filter: grayscale(100%) brightness(0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-icon:hover {
+            filter: grayscale(0%) brightness(1);
+            transform: scale(1.15);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #080811 0%, #1a1a2e 100%);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(156, 124, 246, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(156, 124, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(156, 124, 246, 0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-darker/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-2xl font-bold gradient-text">SINAP<span class="text-secondary">x</span>FORGE</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#accueil" class="animated-border px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Accueil</a>
+                        <a href="#apropos" class="animated-border px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">À propos</a>
+                        <a href="#services" class="animated-border px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Services</a>
+                        <a href="#technologies" class="animated-border px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Technologies</a>
+                        <a href="#contact" class="animated-border px-3 py-2 text-sm font-medium text-gray-300 hover:text-white">Contact</a>
+                    </div>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-darker border-t border-slate-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#accueil" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md">Accueil</a>
+                <a href="#apropos" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md">À propos</a>
+                <a href="#services" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md">Services</a>
+                <a href="#technologies" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md">Technologies</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="relative overflow-hidden gradient-bg">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2265&auto=format&fit=crop')] bg-cover bg-center"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-darker/80 to-darker"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative z-10">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                        <span class="text-white">L'innovation</span><br>
+                        <span class="gradient-text">réinventée</span><br>
+                        <span class="text-white">par la technologie</span>
+                    </h1>
+                    <p class="text-lg text-gray-300 mb-8 max-w-lg">
+                        SINAPxFORGE est votre partenaire en conseil informatique, intelligence artificielle et blockchain. 
+                        Nous transformons vos idées en solutions technologiques performantes.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#services" class="px-8 py-3 bg-gradient-to-r from-primary to-secondary rounded-md font-medium text-darker hover:opacity-90 transition duration-300 flex items-center">
+                            <span>Nos Services</span>
+                            <i class="fas fa-arrow-down ml-2"></i>
+                        </a>
+                        <a href="#contact" class="px-8 py-3 border border-primary text-primary rounded-md font-medium hover:bg-primary/10 transition duration-300 flex items-center">
+                            <span>Contact</span>
+                            <i class="fas fa-envelope ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:block md:w-1/2 relative">
+                    <div class="floating">
+                        <div class="relative">
+                            <div class="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-primary/20 blur-xl"></div>
+                            <div class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-secondary/20 blur-xl"></div>
+                            <div class="relative z-10">
+                                <div class="w-full h-80 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl border border-slate-800 backdrop-blur-sm flex items-center justify-center p-8">
+                                    <div class="text-center">
+                                        <div class="flex justify-center space-x-6 mb-6">
+                                            <div class="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center pulse">
+                                                <i class="fas fa-robot text-2xl text-primary"></i>
+                                            </div>
+                                            <div class="w-14 h-14 rounded-full bg-secondary/20 flex items-center justify-center pulse" style="animation-delay: 0.5s;">
+                                                <i class="fas fa-link text-2xl text-secondary"></i>
+                                            </div>
+                                        </div>
+                                        <h3 class="text-2xl font-bold mb-3 gradient-text">IA & Blockchain</h3>
+                                        <p class="text-gray-400">Solutions intégrées pour l'entreprise de demain</p>
+                                        <div class="mt-6 flex justify-center space-x-2">
+                                            <div class="w-3 h-3 rounded-full bg-primary"></div>
+                                            <div class="w-3 h-3 rounded-full bg-secondary"></div>
+                                            <div class="w-3 h-3 rounded-full bg-accent"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-darker to-transparent z-10"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos" class="py-20 bg-darker">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider text-primary uppercase">À propos de nous</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2">Votre partenaire en <span class="gradient-text">transformation digitale</span></h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-gray-300 mb-6">
+                        SINAPxFORGE est une jeune société dynamique spécialisée dans les technologies de pointe. 
+                        Nous combinons expertise technique et vision stratégique pour accompagner nos clients dans leur transformation numérique.
+                    </p>
+                    <p class="text-gray-300 mb-6">
+                        Notre approche personnalisée nous permet de concevoir des solutions sur mesure qui répondent précisément 
+                        à vos enjeux métiers tout en anticipant les évolutions technologiques futures.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-check text-xs text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-gray-300">
+                                <span class="font-medium">Approche sur mesure</span> - Solutions adaptées à vos besoins spécifiques
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-check text-xs text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-gray-300">
+                                <span class="font-medium">Expertise technique</span> - Maîtrise des dernières technologies
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <i class="fas fa-check text-xs text-primary"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-gray-300">
+                                <span class="font-medium">Vision stratégique</span> - Alignement technologique avec vos objectifs
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute -top-6 -left-6 w-32 h-32 rounded-full bg-primary/10 blur-xl"></div>
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 rounded-full bg-secondary/10 blur-xl"></div>
+                    <div class="relative bg-slate-900/50 border border-slate-800 rounded-xl p-8 backdrop-blur-sm">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4">
+                                <i class="fas fa-lightbulb text-xl text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Notre engagement</h3>
+                        </div>
+                        <p class="text-gray-400 mb-6">
+                            Nous croyons en une technologie qui sert avant tout vos objectifs métiers. 
+                            Notre mission est de vous fournir les outils et l'expertise nécessaires pour tirer pleinement parti 
+                            des opportunités offertes par la transformation numérique.
+                        </p>
+                        <div class="bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+                            <p class="text-gray-300 italic">
+                                "L'innovation ne consiste pas à faire de nouvelles choses, mais à faire les choses d'une manière nouvelle."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gradient-to-b from-darker to-[#0a0a15]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider text-primary uppercase">Nos domaines d'expertise</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2">Services <span class="gradient-text">haut de gamme</span></h2>
+                <p class="max-w-2xl mx-auto mt-4 text-gray-400">
+                    Nous combinons expertise technique et vision stratégique pour vous proposer des solutions innovantes et performantes.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-slate-900/50 border border-slate-800 rounded-xl p-8 transition duration-300">
+                    <div class="w-14 h-14 mb-6 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <i class="fas fa-laptop-code text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Développement Informatique</h3>
+                    <p class="text-gray-400 mb-4">
+                        Création d'applications sur mesure, optimisation de systèmes existants et conseil en architecture logicielle pour maximiser l'efficacité de vos processus métier.
+                    </p>
+                    <div class="mt-4">
+                        <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary">
+                            Solutions sur mesure
+                        </span>
+						<span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary">
+                            dev. assité par l'IA
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-slate-900/50 border border-slate-800 rounded-xl p-8 transition duration-300">
+                    <div class="w-14 h-14 mb-6 rounded-lg bg-secondary/10 flex items-center justify-center">
+                        <i class="fas fa-brain text-2xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Intelligence Artificielle</h3>
+                    <p class="text-gray-400 mb-4">
+                        Implémentation de solutions d'IA adaptées à votre secteur : analyse prédictive, traitement automatique du langage, systèmes de recommandation et vision par ordinateur.
+                    </p>
+                    <div class="mt-4">
+                        <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-secondary/10 text-secondary">
+                            Machine Learning
+                        </span>
+						<span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-secondary/10 text-secondary">
+                            Deep Learning
+                        </span>
+						<span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-secondary/10 text-secondary">
+                            Agent IA
+                        </span>
+						<span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-secondary/10 text-secondary">
+                            Automatisation
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-slate-900/50 border border-slate-800 rounded-xl p-8 transition duration-300">
+                    <div class="w-14 h-14 mb-6 rounded-lg bg-accent/10 flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Formation</h3>
+                    <p class="text-gray-400 mb-4">
+                        Programmes de formation personnalisés pour vos équipes techniques et décisionnelles, du niveau débutant à expert, adaptés à votre secteur d'activité.
+                    </p>
+                    <div class="mt-4">
+                        <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-accent/10 text-accent">
+                            Expertise agent IA
+                        </span>
+						<span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-accent/10 text-accent">
+                            prompt engineering
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-slate-900/50 border border-slate-800 rounded-xl p-8 transition duration-300">
+                    <div class="w-14 h-14 mb-6 rounded-lg bg-purple-500/10 flex items-center justify-center">
+                        <i class="fas fa-link text-2xl text-purple-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Blockchain</h3>
+                    <p class="text-gray-400 mb-4">
+                        Développement de solutions blockchain sécurisées : smart contracts, systèmes de traçabilité, tokenisation d'actifs et applications décentralisées (DApps).
+                    </p>
+                    <div class="mt-4">
+                        <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-purple-500/10 text-purple-500">
+                            Web3.0
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="technologies" class="py-20 bg-darker">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider text-primary uppercase">Notre stack technique</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2">Technologies <span class="gradient-text">maîtrisées</span></h2>
+                <p class="max-w-2xl mx-auto mt-4 text-gray-400">
+                    Nous utilisons les technologies les plus adaptées pour répondre à vos besoins spécifiques.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6">
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="w-12 h-12 mb-2 tech-icon" alt="Python">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">Python</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-12 h-12 mb-2 tech-icon" alt="JavaScript">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">JavaScript</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" class="w-12 h-12 mb-2 tech-icon" alt="TypeScript">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">TypeScript</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="w-12 h-12 mb-2 tech-icon" alt="Docker">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">Docker</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" class="w-12 h-12 mb-2 tech-icon" alt="TensorFlow">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">TensorFlow</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" class="w-12 h-12 mb-2 tech-icon" alt="PyTorch">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">PyTorch</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg" class="w-12 h-12 mb-2 tech-icon" alt="Solidity">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">Solidity</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="w-12 h-12 mb-2 tech-icon" alt="Java">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">Java</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rails/rails-original-wordmark.svg" class="w-12 h-12 mb-2 tech-icon" alt="Ruby on Rails">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">Ruby on Rails</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" class="w-12 h-12 mb-2 tech-icon" alt="Node.js">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">Node.js</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/delphi/delphi-original.svg" class="w-12 h-12 mb-2 tech-icon" alt="Delphi">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">Delphi</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <div class="w-12 h-12 mb-2 flex items-center justify-center bg-gray-800 rounded-lg">
+                        <span class="text-xs font-bold text-gray-300 group-hover:text-primary transition duration-300">N8N</span>
+                    </div>
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">N8N</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <div class="w-12 h-12 mb-2 flex items-center justify-center bg-gray-800 rounded-lg">
+                        <span class="text-xs font-bold text-gray-300 group-hover:text-primary transition duration-300">Coolify</span>
+                    </div>
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">Coolify</span>
+                </div>
+                <div class="flex flex-col items-center p-4 group">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" class="w-12 h-12 mb-2 tech-icon" alt="Jira">
+                    <span class="text-xs text-gray-300 group-hover:text-primary transition duration-300">Jira</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-b from-[#0a0a15] to-darker">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-sm font-semibold tracking-wider text-primary uppercase">Contactez-nous</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6">Prêt à <span class="gradient-text">collaborer</span> ?</h2>
+                    <p class="text-gray-400 mb-8 max-w-lg">
+                        Que vous ayez un projet précis ou simplement des questions sur nos services, notre équipe est à votre disposition pour échanger et vous conseiller.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium">Email</h3>
+                                <a href="mailto:contact@sinapxforge.fr" class="text-gray-400 hover:text-primary transition duration-300">contact@sinapxforge.fr</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <h3 class="text-lg font-medium mb-4">Suivez-nous</h3>
+                        <div class="flex space-x-4">
+                            <a href="https://www.linkedin.com/company/sinapxforge" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary/10 transition duration-300 group">
+                                <i class="fab fa-linkedin-in text-xl text-gray-400 group-hover:text-primary"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-8 backdrop-blur-sm">
+                    <h3 class="text-xl font-bold mb-6">Envoyez-nous un message</h3>
+                    <form id="contactForm" action="mailto:contact@sinapxforge.fr" method="post" enctype="text/plain" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium mb-2">Nom complet</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent" placeholder="Votre nom" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent" placeholder="votre@email.com" required>
+                        </div>
+                        <div>
+                            <label for="service" class="block text-sm font-medium mb-2">Service concerné</label>
+                            <select id="service" name="service" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent">
+                                <option value="">Sélectionnez un service</option>
+                                <option value="dev">Développement Informatique</option>
+                                <option value="ai">Intelligence Artificielle</option>
+                                <option value="training">Formation</option>
+                                <option value="blockchain">Blockchain</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent" placeholder="Décrivez votre projet ou demande..." required></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-lg font-medium text-darker hover:opacity-90 transition duration-300 flex items-center justify-center">
+                            <span>Envoyer le message</span>
+                            <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darker border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <span class="text-2xl font-bold gradient-text">SINAP<span class="text-secondary">x</span>FORGE</span>
+                    <p class="mt-4 text-gray-400 max-w-md">
+                        Votre partenaire en conseil informatique, intelligence artificielle et blockchain pour une transformation numérique réussie.
+                    </p>
+                    <div class="mt-6 flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary/10 transition duration-300 group">
+                            <i class="fab fa-linkedin-in text-gray-400 group-hover:text-primary"></i>
+                        </a>
+                     </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider text-gray-300 uppercase">Navigation</h3>
+                    <div class="mt-4 space-y-3">
+                        <a href="#accueil" class="block text-gray-400 hover:text-primary transition duration-300">Accueil</a>
+                        <a href="#apropos" class="block text-gray-400 hover:text-primary transition duration-300">À propos</a>
+                        <a href="#services" class="block text-gray-400 hover:text-primary transition duration-300">Services</a>
+                        <a href="#technologies" class="block text-gray-400 hover:text-primary transition duration-300">Technologies</a>
+                        <a href="#contact" class="block text-gray-400 hover:text-primary transition duration-300">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider text-gray-300 uppercase">Services</h3>
+                    <div class="mt-4 space-y-3">
+                        <a href="#services" class="block text-gray-400 hover:text-primary transition duration-300">Développement</a>
+                        <a href="#services" class="block text-gray-400 hover:text-primary transition duration-300">IA</a>
+                        <a href="#services" class="block text-gray-400 hover:text-primary transition duration-300">Formation</a>
+                        <a href="#services" class="block text-gray-400 hover:text-primary transition duration-300">Blockchain</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm text-gray-500">© 2025 SINAPxFORGE. Tous droits réservés.</p>
+                <div class="mt-4 md:mt-0">
+                    <a href="mailto:contact@sinapxforge.fr" class="text-sm text-gray-500 hover:text-primary transition duration-300">contact@sinapxforge.fr</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    mobileMenu.classList.add('hidden');
+                    
+                    // Scroll to target
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                // The form will submit via mailto: protocol
+                // You can add additional validation here if needed
+                console.log('Form submitted');
+            });
+        }
+
+        // Add animation to service cards on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
